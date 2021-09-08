@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from math import sqrt
 import rospy
@@ -59,11 +59,12 @@ class Node:
 		self.tempTopic = self.get_param('/atlas/Temperature/topic', '/atlas/raw/Temperature')
 		
 		# Addresses for sensors
-		self.ec_address = int(self.get_param('/atlas/Conductivity/SEPort', '1'))
-		self.orp_address = int(self.get_param('/atlas/RedoxPotential/SEPort', '2'))
-		self.ph_address = int(self.get_param('/atlas/pH/SEPort', '3'))
-		self.do_address = int(self.get_param('/atlas/DissolvedOxygem/SEPort', '4'))
-		self.temp_address = int(self.get_param('/atlas/Temperature/SEPort', '5'))
+		self.ec_address = int(self.get_param('/atlas/Conductivity/SEPort', '100'))
+		self.orp_address = int(self.get_param('/atlas/RedoxPotential/SEPort', '98'))
+		self.ph_address = int(self.get_param('/atlas/pH/SEPort', '99'))
+		self.do_address = int(self.get_param('/atlas/DissolvedOxygem/SEPort', '97'))
+		self.temp_address = int(self.get_param('/atlas/Temperature/SEPort', '102'))
+		rospy.loginfo(f"Temperature address is: {self.temp_address}")
 
 		# Publishers
 		self.phPub = rospy.Publisher(self.phTopic, Ph, queue_size=10)
@@ -94,15 +95,15 @@ class Node:
 
 		# Message instances for sensors
 		self.pH_msg = Ph()
-		self.pH_msg.header.frame_id = '%s' % self.system_name
+		self.pH_msg.header.frame_id = '%s' % "base_link"
 		self.ec_msg = Conductivity()
-		self.ec_msg.header.frame_id = '%s' % self.system_name
+		self.ec_msg.header.frame_id = '%s' % "base_link"
 		self.do_msg = DissolvedOxygen()
-		self.do_msg.header.frame_id = '%s' % self.system_name
+		self.do_msg.header.frame_id = '%s' % "base_link"
 		self.temp_msg = Temperature()
-		self.temp_msg.header.frame_id = '%s' % self.system_name
+		self.temp_msg.header.frame_id = '%s' % "base_link"
 		self.orp_msg = OxiRedoxPotential()
-		self.orp_msg.header.frame_id = '%s' % self.system_name
+		self.orp_msg.header.frame_id = '%s' % "base_link"
 
 		# Rate (defined by parameter)
 		hz = self.get_param('/atlas/rate', "10")

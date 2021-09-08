@@ -23,7 +23,7 @@ To switch the sensors around different ports in the Serial Extender, set the acc
         <param name="atlas/OxiRedoxPotential/SEPort" value="2"/>
         <param name="atlas/pH/SEPort" value="3"/>
         <param name="atlas/DissolvedOxygen/SEPort" value="4"/>
-        <param name="atlas/Temperature/SEPort" value="5"/>
+        <param name="atlas/Temperature/SEPort" value="102"/>
 
         <!-- Update rate -->
         <param name="/atlas/rate" value="10" />

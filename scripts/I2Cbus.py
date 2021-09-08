@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import smbus
 import serial
@@ -14,7 +14,7 @@ class I2Cbus:
 		try:
 			response = self.bus.read_i2c_block_data(address, 0x00)
 		except IOError as e:
-			print "[Quality] Error %s occurred while reading on address %d" % (e.strerror, address)
+			print ("[Quality] Error %s occurred while reading on address %d" % (e.strerror, address))
 			return None
 		response = [i for i in response if not i == '\00']
 		char_list = list(map(lambda x: chr(x & ~0x80), list(response[1:])))
@@ -36,7 +36,7 @@ class I2Cbus:
 			time.sleep(self.__timeout)			# Wait 1s for response to arrive
 			return True
 		except IOError as e:
-			print "[Quality] Error %s occurred while writing on address %d" % (e.strerror, address)
+			print ("[Quality] Error %s occurred while writing on address %d" % (e.strerror, address))
 			return None
 
 	def get_data(self, address):
